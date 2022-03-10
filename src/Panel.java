@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
@@ -8,51 +7,65 @@ import javax.swing.event.MouseInputListener;
 
 public class Panel extends JPanel implements MouseInputListener{
     private int size;
-    private int dieFace=1;
-    private double tile=0;
+    
+    private double dot=0;
 
-    public Panel(int size){
+    public Die dieMatrix[][];
+    public int dieMatrixSize;
+    public int offset;
+
+    public Panel(int size,int dieMatrixSize){
+        this.size = size;
+        this.dieMatrixSize=dieMatrixSize;
+        dieMatrix= new Die[dieMatrixSize][dieMatrixSize];
+        
+        for(int i=0;i<dieMatrixSize;i++){
+            for(int j=0;j<dieMatrixSize;j++){
+                dieMatrix[j][i]= new Die();
+            }
+        }
+
         this.setFocusable(true);
         this.addMouseListener(this);
-        this.size = size;
         this.setBounds(0,0,size,size);
         this.setVisible(true);
         
-        tile=size/7;
+        offset=size/dieMatrixSize;
+        dot=(size/7)/dieMatrixSize;
     }
 
     public void paint(Graphics g){
         g.setColor(new Color(255,255,255));
         g.fillRect(0, 0, size, size);
-        paintDie(g);
-        g.drawString("iterator", 0, 0);
-        
+        paintDieMatrix(g);   
     }
 
-    public void paintDie(Graphics g){
-        
+    public void paintDieMatrix(Graphics g){
         g.setColor(new Color(0,0,0));    
 
-        g.setColor(new Color(0,0,0));
-        //Integer.toString(dieFace
-        if((dieFace & 1)>0){
-            g.fillRect((int)(3*tile),(int)(3*tile),(int)tile,(int)tile);
-        }
+        for(int i=0;i<dieMatrixSize;i++){
+            for(int j=0;j<dieMatrixSize;j++){
+                //Integer.toString(dieFace
+                if((dieMatrix[j][i].getdieFace() & 1)>0){
+                    g.fillRect((int)(j*offset+3*dot),(int)(i*offset+3*dot),(int)dot,(int)dot);
+                }
 
-        if((dieFace>>1)>0){
-            g.fillRect((int)(5*tile),(int)(1*tile),(int)tile,(int)tile);
-            g.fillRect((int)(1*tile),(int)(5*tile),(int)tile,(int)tile);
-        }
+                if((dieMatrix[j][i].getdieFace()>>1)>0){
+                    g.fillRect((int)(j*offset+5*dot),(int)(i*offset+1*dot),(int)dot,(int)dot);
+                    g.fillRect((int)(j*offset+1*dot),(int)(i*offset+5*dot),(int)dot,(int)dot);
+                }
 
-        if((dieFace>>2)>0){
-            g.fillRect((int)(1*tile),(int)(1*tile),(int)tile,(int)tile);
-            g.fillRect((int)(5*tile),(int)(5*tile),(int)tile,(int)tile);
-        }
+                if((dieMatrix[j][i].getdieFace()>>2)>0){
+                    g.fillRect((int)(j*offset+1*dot),(int)(i*offset+1*dot),(int)dot,(int)dot);
+                    g.fillRect((int)(j*offset+5*dot),(int)(i*offset+5*dot),(int)dot,(int)dot);
+                }
 
-        if((dieFace & 6)==6){
-            g.fillRect((int)(5*tile),(int)(3*tile),(int)tile,(int)tile);
-            g.fillRect((int)(1*tile),(int)(3*tile),(int)tile,(int)tile);
-        }
+                if((dieMatrix[j][i].getdieFace() & 6)==6){
+                    g.fillRect((int)(j*offset+5*dot),(int)(i*offset+3*dot),(int)dot,(int)dot);
+                    g.fillRect((int)(j*offset+1*dot),(int)(i*offset+3*dot),(int)dot,(int)dot);
+                }
+            }
+        }   
     }
 
     @Override
@@ -63,10 +76,11 @@ public class Panel extends JPanel implements MouseInputListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        dieFace++;
-        if(dieFace>6){
-            dieFace=1;
-        }
+        for(int i=0;i<dieMatrixSize;i++){
+            for(int j=0;j<dieMatrixSize;j++){
+                dieMatrix[j][i].setdieFace();
+            }
+        }   
         repaint();
     }
 

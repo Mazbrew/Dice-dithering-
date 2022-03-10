@@ -12,7 +12,7 @@ public class Frame extends JFrame{
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-panel.getSize().width/2,Toolkit.getDefaultToolkit().getScreenSize().height/2-panel.getSize().height/2);
         this.setUndecorated(false);
         this.pack();
-        this.setTitle("Die generation for shits and giggles");
+        this.setTitle("Die dithering");
         this.setResizable(false);
         this.setContentPane(panel);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
