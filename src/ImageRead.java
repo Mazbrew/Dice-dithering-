@@ -4,7 +4,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class ImageRead{
-    BufferedImage img = ImageIO.read(new File("smallmiranjo.png"));
+    BufferedImage img = ImageIO.read(new File("suki.png"));
     public ImageRead() throws Exception{
         
 

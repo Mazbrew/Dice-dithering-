@@ -75,14 +75,7 @@ public class Panel extends JPanel implements MouseInputListener{
     public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-        // for(int i=0;i<dieMatrixSize;i++){
-        //     for(int j=0;j<dieMatrixSize;j++){
-        //         dieMatrix[j][i].setdieFace();
-        //     }
-        // }   
-        repaint();
-    }
+    public void mouseReleased(MouseEvent e) {}
 
     @Override
     public void mouseEntered(MouseEvent e) {}
