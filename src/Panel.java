@@ -14,14 +14,14 @@ public class Panel extends JPanel implements MouseInputListener{
     public int dieMatrixSize;
     public int offset;
 
-    public Panel(int size,int dieMatrixSize){
+    public Panel(int size,int dieMatrixSize) throws Exception{
         this.size = size;
         this.dieMatrixSize=dieMatrixSize;
         dieMatrix= new Die[dieMatrixSize][dieMatrixSize];
         
         for(int i=0;i<dieMatrixSize;i++){
             for(int j=0;j<dieMatrixSize;j++){
-                dieMatrix[j][i]= new Die();
+                dieMatrix[j][i]= new Die(j,i);
             }
         }
 
@@ -76,11 +76,11 @@ public class Panel extends JPanel implements MouseInputListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        for(int i=0;i<dieMatrixSize;i++){
-            for(int j=0;j<dieMatrixSize;j++){
-                dieMatrix[j][i].setdieFace();
-            }
-        }   
+        // for(int i=0;i<dieMatrixSize;i++){
+        //     for(int j=0;j<dieMatrixSize;j++){
+        //         dieMatrix[j][i].setdieFace();
+        //     }
+        // }   
         repaint();
     }
 
