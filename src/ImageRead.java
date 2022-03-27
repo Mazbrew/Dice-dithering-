@@ -4,15 +4,17 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class ImageRead{
-    BufferedImage img = ImageIO.read(new File("suki.png"));
+    BufferedImage img;
     public ImageRead() throws Exception{
-        
+        img = ImageIO.read(new File("gen5.tif"));
+    }
 
-        for(int i=0;i<img.getHeight();i++){
-            for(int j=0;j<img.getWidth();j++){
+    public int getWidth(){
+        return img.getWidth();
+    }
 
-            }
-        }
+    public int getheight(){
+        return img.getHeight();
     }
 
     public int getPixelVal(int x,int y){
