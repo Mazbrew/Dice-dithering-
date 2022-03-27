@@ -1,15 +1,7 @@
-import java.util.Random;
-
 public class Die {
     private int dieFace=1;
-    private int offset=0;
-
-    private int x;
-    private int y;
-    private int color;
 
     public Die(int x,int y, int color) throws Exception{
-        this.color= color;
         double greyscale=0;
 
 
@@ -25,8 +17,6 @@ public class Die {
     }
 
     public void setdieFace(){
-        // Random rnd = new Random();
-        // dieFace=rnd.nextInt(6)+1;
         if(++dieFace>12){
             dieFace=1;
         }
